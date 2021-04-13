@@ -15,6 +15,7 @@ gunicorn = "*"
 django-heroku = "*"
 django-cors-headers = "*"
 pillow = "*"
+six = "*"
 
 [dev-packages]
 
