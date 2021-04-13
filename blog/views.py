@@ -13,8 +13,9 @@ def base64_file(data, name=None):
     return ContentFile(base64.b64decode(_img_str), name='{}.{}'.format(name, ext))
 
 class PostList(generics.ListCreateAPIView):
-    queryset = PostFile.objects.all()
-    serializer_class = PostFileSerializer
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
