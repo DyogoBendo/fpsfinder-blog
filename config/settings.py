@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG") == True
 
-ALLOWED_HOSTS = ['https://fpsfinder-blog.herokuapp.com/']
+ALLOWED_HOSTS = ['https://fpsfinder-blog.herokuapp.com/', "http://localhost:3000"]
 
 
 # Application definition
