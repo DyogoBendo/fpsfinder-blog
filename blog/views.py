@@ -15,11 +15,6 @@ def base64_file(data, name=None):
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    
-    def post(self, request, *args, **kwargs):
-        request.banner = base64_file(request.banner)                        
-        return self.create(request, *args, **kwargs)
-    
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
