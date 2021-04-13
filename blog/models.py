@@ -6,7 +6,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)    
     content = models.TextField()
     
-    banner = models.ImageField(blank=True, upload_to="banners/")
+    banner = models.FileField(blank=True, upload_to="banners/")
     banner_url = models.URLField(blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
