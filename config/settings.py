@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'cloudinary',
     
     # Local
     'blog',
@@ -146,3 +147,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 django_heroku.settings(locals())
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CLOUDINARY = {
+    'cloud_name': os.environ.get("CLOUD_NAME", "dgkfcpp9p"),
+    'api_key': os.environ.get("API_KEY", "619185645773411"),
+    'api_secret': os.environ.get("API_SECRET", "hdl8wETct2sbwr4Mj3Qmp2YC1U4"),    
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

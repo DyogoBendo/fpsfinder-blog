@@ -1,4 +1,6 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -14,7 +16,7 @@ class Post(models.Model):
 
 
 class PostFile(models.Model):        
-    file = models.FileField(upload_to="images/", blank=True)      
+    file = CloudinaryField('image')    
     name = models.CharField(max_length=50)      
     def __str__(self) -> str:        
         return self.name

@@ -16,6 +16,7 @@ django-heroku = "*"
 django-cors-headers = "*"
 pillow = "*"
 six = "*"
+cloudinary = "*"
 
 [dev-packages]
 
