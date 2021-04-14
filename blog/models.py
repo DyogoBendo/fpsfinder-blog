@@ -10,9 +10,11 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     slang = models.CharField(max_length=25)
     published = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
+    font_banner = models.URLField()
     
     def __str__(self) -> str:
-        return self.title
+        return self.slang
 
 
 class PostFile(models.Model):        
