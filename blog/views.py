@@ -53,8 +53,9 @@ class FileList(generics.ListCreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         headers["Access-Control-Allow-Origin"] = "*"
-        headers["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+        headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
         headers["Access-Control-Max-Age"] = "1000"
         headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
+        print(headers)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
