@@ -55,6 +55,6 @@ class FileList(generics.ListCreateAPIView):
         headers["Access-Control-Allow-Origin"] = "*"
         headers["Access-Control-Allow-Methods"] = "GET, OPTIONS"
         headers["Access-Control-Max-Age"] = "1000"
-        headers["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
+        headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
