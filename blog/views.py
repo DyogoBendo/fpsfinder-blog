@@ -34,8 +34,7 @@ class FileList(generics.ListCreateAPIView):
                     "name": key,
                     "file": value                
                 }                                                
-                draft_request_data.append(name_file)
-                print(key, value)
+                draft_request_data.append(name_file)                
                             
             kwargs["data"] = draft_request_data                                                        
             serializer = self.get_serializer(data=draft_request_data, many=True)
@@ -45,11 +44,12 @@ class FileList(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
         else:
             
-            name_file = {
-                    "name": request.data.keys()[0],
-                    "file": request.data.values()[0]                
-                }
-            print(name_file)            
+            for key, value in request.data.items():                                       
+                name_file = {
+                    "name": key,
+                    "file": value                
+                }                
+                               
             kwargs["data"] = name_file
             serializer = self.get_serializer(data=name_file, many=False)
             serializer.is_valid(raise_exception=True)
