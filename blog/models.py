@@ -11,7 +11,8 @@ class Post(models.Model):
     slang = models.CharField(max_length=25)
     published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
-    font_banner = models.URLField()
+    banner_link = models.URLField()
+    font_banner = models.CharField(max_length=30)
     
     def __str__(self) -> str:
         return self.slang
