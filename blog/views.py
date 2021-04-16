@@ -24,38 +24,26 @@ class FileList(generics.ListCreateAPIView):
     serializer_class = PostFileSerializer    
     
     def create(self, request, *args, **kwargs):
+        many = len(request.data.keys()) > 1                        
+        draft_request_data = []        
         
-        if len(request.data.keys()) > 1:        
-            draft_request_data = []        
-            
-            for key, value in request.data.items():                       
-                
-                name_file = {
-                    "name": key,
-                    "file": value                
-                }                                                
-                draft_request_data.append(name_file)                
-                            
-            kwargs["data"] = draft_request_data                                                        
-            serializer = self.get_serializer(data=draft_request_data, many=True)
-        else:
-            
-            for key, value in request.data.items():                                       
-                name_file = {
-                    "name": key,
-                    "file": value                
-                }                
-                               
-            kwargs["data"] = name_file
-            serializer = self.get_serializer(data=name_file, many=False)
-            
+        for key, value in request.data.items():                                   
+            name_file = {
+                "name": key,
+                "file": value                
+            }                                                
+            draft_request_data.append(name_file)                
+                        
+        kwargs["data"] = data = draft_request_data if many else name_file                                    
+        serializer = self.get_serializer(data=data, many=many)                                                                                                    
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        
         headers = self.get_success_headers(serializer.data)
         headers["Access-Control-Allow-Origin"] = "*"
         headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
         headers["Access-Control-Max-Age"] = "1000"
-        headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
-        print(headers)
+        headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"        
+        
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
