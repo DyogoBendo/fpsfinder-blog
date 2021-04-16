@@ -12,7 +12,7 @@ class Post(models.Model):
     featured = models.BooleanField(default=False)
     banner_link = models.URLField()
     font_banner = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30)
+    slug = models.CharField(max_length=55)
     
     def __str__(self) -> str:
         return self.slug
