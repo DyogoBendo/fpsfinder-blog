@@ -46,7 +46,7 @@ from .models import Post, PostFile
 
 class PostSerializer(serializers.ModelSerializer):            
     class Meta:
-        fields = ('id', 'title', 'content', 'created_at', 'published', 'featured', 'font_banner', 'banner_link', 'slang')
+        fields = ('id', 'title', 'content', 'last_edited_at', 'published', 'featured', 'font_banner', 'banner_link', 'slang')
         model = Post
     
 

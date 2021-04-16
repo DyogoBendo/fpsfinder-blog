@@ -7,8 +7,7 @@ from cloudinary.models import CloudinaryField
 class Post(models.Model):
     title = models.CharField(max_length=50)    
     content = models.TextField()    
-    created_at = models.DateTimeField(auto_now_add=True)
-    slang = models.CharField(max_length=25)
+    last_edited_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     banner_link = models.URLField()
