@@ -15,7 +15,7 @@ class Post(models.Model):
     slug = models.CharField(max_length=30)
     
     def __str__(self) -> str:
-        return self.slang
+        return self.slug
 
 
 class PostFile(models.Model):        
