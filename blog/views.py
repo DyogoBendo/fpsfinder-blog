@@ -6,6 +6,8 @@ from django.core.files.base import ContentFile, File
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 
 
 class PostList(generics.ListCreateAPIView):
@@ -46,4 +48,33 @@ class FileList(generics.ListCreateAPIView):
         headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"        
         
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    
+
+
+class FeaturedUpdate(APIView):    
+    def put(self, request, pk):
+        
+        try:
+            model_old = get_object_or_404(Post, featured=True)        
+            
+            print("Modelo antigo: ", model_old.featured)
+            data_old = {"featured": False}         
+            serializer = PostSerializer(model_old, data=data_old, partial=True)
+            
+            if serializer.is_valid():
+                serializer.save()
+        except:
+            pass
+        
+        model_1 = get_object_or_404(Post, pk=pk) 
+        print("Modelo: ", model_1.featured)   
+        
+        data = {"featured": True}
+        serializer = PostSerializer(model_1, data=data, partial=True)
+        
+        
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

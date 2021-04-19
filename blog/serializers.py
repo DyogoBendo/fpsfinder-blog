@@ -54,3 +54,4 @@ class PostFileSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'name', 'file')
         model = PostFile
+        
