@@ -50,13 +50,11 @@ class FileList(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class FeaturedUpdate(APIView):    
+class FeaturedDetail(APIView):    
     def put(self, request, pk):
         
         try:
-            model_old = get_object_or_404(Post, featured=True)        
-            
-            print("Modelo antigo: ", model_old.featured)
+            model_old = get_object_or_404(Post, featured=True)                                
             data_old = {"featured": False}         
             serializer = PostSerializer(model_old, data=data_old, partial=True)
             
@@ -64,17 +62,21 @@ class FeaturedUpdate(APIView):
                 serializer.save()
         except:
             pass
-        
-        model_1 = get_object_or_404(Post, pk=pk) 
-        print("Modelo: ", model_1.featured)   
-        
+        model_1 = get_object_or_404(Post, pk=pk)                    
         data = {"featured": True}
-        serializer = PostSerializer(model_1, data=data, partial=True)
-        
-        
+        serializer = PostSerializer(model_1, data=data, partial=True)                
         
         if serializer.is_valid():
             serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request):
+        model = get_object_or_404(Post, featured=True)                                
+        data = {"featured": False}         
+        serializer = PostSerializer(model, data=data, partial=True)
+    
+        if serializer.is_valid():
             return Response(serializer.data)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
