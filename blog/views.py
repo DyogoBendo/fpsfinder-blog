@@ -24,7 +24,7 @@ class PostList(generics.ListCreateAPIView):
         
         has_page = True if request.GET.get("page") else False                
         if has_page:                                                               
-            queryset = self.filter_queryset(Post.objects.filter(published__exact=False, featured__exact=False).order_by("-last_edited_at")[3:])
+            queryset = self.filter_queryset(Post.objects.filter(published__exact=True, featured__exact=False).order_by("-last_edited_at")[3:])
             page = self.paginate_queryset(queryset)                                                    
                 
             if page is not None:
