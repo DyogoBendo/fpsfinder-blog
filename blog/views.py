@@ -7,6 +7,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework import viewsets
 
 class SetPagination(PageNumberPagination):
     page_size = 9
@@ -44,12 +45,11 @@ class PostList(generics.ListCreateAPIView):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         
 
-            
-        
-
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    
+    
         
 
 class FileList(generics.ListCreateAPIView):    
@@ -114,10 +114,16 @@ class FeaturedDetail(APIView):
 class LatestPostList(APIView):
     def get(self, request):
         try: 
-            post = Post.objects.filter(published__exact=True, featured__exact=False).order_by('-last_edited_at')[:3]
-            print(post)
+            post = Post.objects.filter(published__exact=True, featured__exact=False).order_by('-last_edited_at')[:3]            
             serializer = PostSerializer(post, many=True)
             return Response(serializer.data)
-        except:
-            print("banana")
+        except:            
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class PostSlugDetail(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = 'slug'
+    
+    
