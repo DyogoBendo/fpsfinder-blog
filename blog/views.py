@@ -3,7 +3,7 @@ from rest_framework import generics
 from .serializers import PostSerializer, PostFileSerializer
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, filters
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
@@ -20,6 +20,8 @@ class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     parser_classes = [MultiPartParser, JSONParser]    
     pagination_class = SetPagination
+    search_fields = ['title']
+    filter_backends = (filters.SearchFilter,)    
     
     def list(self, request, *args, **kwargs):
         

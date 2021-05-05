@@ -8,5 +8,5 @@ urlpatterns = [
     path('featured/', FeaturedDetail.as_view()),
     path('featured/<int:pk>', FeaturedDetail.as_view()),    
     path('latest-posts/', LatestPostList.as_view()),    
-    path("<slug:slug>/", PostSlugDetail.as_view({'get': 'retrieve'})),        
+    path("<slug:slug>/", PostSlugDetail.as_view({'get': 'retrieve'})),            
 ]
