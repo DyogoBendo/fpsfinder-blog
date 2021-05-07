@@ -110,7 +110,7 @@ class FeaturedDetail(APIView):
             serializer = PostSerializer(model, partial=True)            
             return Response(serializer.data)
         except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response([])
 
 
 class LatestPostList(APIView):
